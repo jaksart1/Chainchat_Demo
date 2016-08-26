@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  h1#header ChainChat
+    form(class='logout', action='/register', method='get')
+      input(type='submit', class='loginbutton', id='logoutbutton', value='Register')
+  hr#headline 
+  div#subhead Chainchat is the blockchain based messenger
+  if (typeof(error) !== 'undefined') 
+    form#login(action='/login', method='post')
+        #error !{error1}
+        #loginboxtext username
+        input#userin(type='text', name='username', autofocus placeholder="Username")
+        br
+        |password
+        br
+        input#passin(type='password', name='password' placeholder="Password")
+        br 
+        input#loginb(type='submit', value='Log In', class='loginbutton')
+  else
+    form#login(action='/login', method='post')
+        #loginboxtext username
+        input#userin(type='text', name='username', autofocus placeholder="Username")
+        br
+        |password
+        br
+        input#passin(type='password', name='password' placeholder="Password")
+        br 
+        input#loginb(type='submit', value='Log In', class='loginbutton')

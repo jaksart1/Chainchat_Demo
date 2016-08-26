@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  h1#header ChainChat
+    button.hamburger ☰
+    p#roomlist(class="menu")
+      span(id="Room1", class="menu_item") Room1
+      span(id="Room2", class="menu_item") Room2
+      span(id="Room3", class="menu_item") Room3
+    span(id="+", class="new_room") +
+    button#themepick(class="jscolor {valueElement:null,value:'006699',onFineChange:'update(this)'}" )
+    form(class='logout', action='/logout', method='get')
+      input(type='submit', class='loginbutton', id='logoutbutton', value='Logout')
+
+    
+  
+
+  div#sidebar 
+    p(id='sidebarTitle') Room1
+
+
+  div#chatview
+    
+  div#sendview
+    textarea(id="chatinput", placeholder="Enter message...", autofocus)
+    button#send <i class="material-icons md-48">send</i>
+  audio#blop(src="/audio/blop.ogg")
+  script(type='text/javascript').
+    var token = !{JSON.stringify(token)}
+  script(src="/javascripts/sockets.js")
+  script.
+    function update(jscolor) {
+      document.getElementById('header').style.backgroundColor = '#' + jscolor;
+      document.getElementById('send').style.backgroundColor = '#' + jscolor;
+      document.getElementById('roomlist').style.background = '#' + jscolor;
+      var bigint = parseInt(jscolor, 16);
+      var r = (bigint >> 16) & 255;
+      var g = (bigint >> 8) & 255;
+      var b = bigint & 255;
+      document.getElementById('sidebar').style.backgroundColor = 'rgba(' + r + ',' + g + ',' + b + ',0.3)';
+
+
+    }

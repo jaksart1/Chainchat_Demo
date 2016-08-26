@@ -1,0 +1,39 @@
+extends layout
+
+block content
+    h1#header(href='/') ChainChat
+        form(class='logout', action='/', method='get')
+            input(type='submit', class='loginbutton', id='logoutbutton', value='Sign in')
+    if (typeof(error) !== 'undefined')
+        form#login(action='/register', method='post')
+            #error !{error1}
+            #loginboxtext Register
+            br
+            |username:
+            input#userin(type='text', name='username', placeholder='Username...', autofocus)
+            br
+            |password:
+            br
+            input#passin(type='password', name='password', placeholder='Password...' )
+            input#passin(type='password', name='passwordCheck', placeholder='Re-enter password...')
+            br            
+            input(name="color2" type="hidden" id="color_value" value="66ccff")
+            button#colorpick(class="jscolor {valueElement:'color_value'}") Choose a color!
+            br
+            input#regbutton(type='submit', value='Register', class='loginbutton')
+    else    
+        form#login(action='/register', method='post')
+            #loginboxtext Register
+            br
+            |username:
+            input#userin(type='text', name='username', placeholder='Username...', autofocus)
+            br
+            |password:
+            br
+            input#passin(type='password', name='password', placeholder='Password...' )
+            input#passin(type='password', name='passwordCheck', placeholder='Re-enter password...')
+            br
+            input(name="color2" type="hidden" id="color_value" value="66ccff")
+            button#colorpick(class="jscolor {valueElement:'color_value'}") Choose a color!
+            br
+            input#regbutton(type='submit', value='Register', class='loginbutton')
