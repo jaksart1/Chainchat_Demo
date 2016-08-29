@@ -8,6 +8,4 @@ applications:
   disk_quota: 1024M
   services:
   - chainchat
-  - Blockchain-n9
-  - chainchatDB
   command: DEBUG=chainchat:* npm start
