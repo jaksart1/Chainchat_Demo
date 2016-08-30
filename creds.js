@@ -222,21 +222,43 @@ else {
             if (servicesObject[i][0].credentials && servicesObject[i][0].credentials.peers) {
                 console.log('overwritting peers, loading from a vcap service: ', i);
                 peers = servicesObject[i][0].credentials.peers;
-                var ca_name = Object.keys(servicesObject[i][0].credentials.ca)[0];
-                console.log("loading ca:", ca_name);
-                ca = servicesObject[i][0].credentials.ca[ca_name];
-                if (servicesObject[i][0].credentials.users) {
-                    console.log('overwritting users, leoading from a vcap service: ', i);
-                    users = servicesObject[i][0].credentials.users;
+				peerURLs = [];
+                peerHosts = [];
+                for (var j in peers) {
+                    peerURLs.push("grpcs://" + peers[j].discovery_host + ":" + peers[j].discovery_port);
+                    peerHosts.push("" + peers[j].discovery_host);
                 }
-                else users = null;														//no security
+                if (servicesObject[i][0].credentials.ca) {
+                    console.log('overwritting ca, loading from a vcap service: ', i);
+                    ca = servicesObject[i][0].credentials.ca;
+                    for (var z in ca) {
+                        caURL = "grpcs://" + ca[z].discovery_host + ":" + ca[z].discovery_port;
+                    }
+                    if (servicesObject[i][0].credentials.users) {
+                        console.log('overwritting users, loading from a vcap service: ', i);
+                        users = servicesObject[i][0].credentials.users;
+                        //TODO extract registrar from users once user list has been updated to new SDK
+                    }
+                    else users = null;													//no security	
+                }
+                else ca = null;
                 break;
             }
         }
-    }
-	credentials.peers = peers;
-	credentials.ca = ca;
-	credentials.users = users;
-}
+		if (i.indexOf('cloudantNoSQLDB') >= 0) {
+			if(servicesObject[i][0].credentials) {
+				console.log('loading cloudant credintials from vcap services');
+				cloudant_creds = servicesObject[i][0].credentials;
+			}
+		}											// looks close enough (can be suffixed dev, prod, or staging)
 
-exports.credentials = credentials;
+		}
+		credentials.dbcreds = cloudant_creds;
+		credentials.peerURLs = peerURLs;
+		credentials.caURL = caURL;
+		credentials.peers = peers;
+		credentials.ca = ca;
+		credentials.users = users;
+	}
+
+	exports.credentials = credentials;
