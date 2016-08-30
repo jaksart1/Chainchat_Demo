@@ -111,7 +111,7 @@ chain.addPeer(creds.peerURLs[3], { pem: pem });
 
 
 // Set the chaincode's registrar
-chain.enroll("admin", "58af6fbdc5", function (err, registrarUser) {
+chain.enroll("admin", creds.adminPass, function (err, registrarUser) {
   if (err) {
     console.log(err);
     return console.log("[ERROR] Unable to enroll the registrar user: %s", err);

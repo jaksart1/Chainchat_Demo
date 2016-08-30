@@ -237,6 +237,11 @@ else {
                     if (servicesObject[i][0].credentials.users) {
                         console.log('overwritting users, loading from a vcap service: ', i);
                         users = servicesObject[i][0].credentials.users;
+						for (var zz in users) {
+							if (users[zz].username == 'admin') {
+								adminPass = users[zz].secret;
+							}
+						}
                         //TODO extract registrar from users once user list has been updated to new SDK
                     }
                     else users = null;													//no security	
@@ -246,19 +251,20 @@ else {
             }
         }
 		if (i.indexOf('cloudantNoSQLDB') >= 0) {
-			if(servicesObject[i][0].credentials) {
+			if (servicesObject[i][0].credentials) {
 				console.log('loading cloudant credintials from vcap services');
 				cloudant_creds = servicesObject[i][0].credentials;
 			}
 		}											// looks close enough (can be suffixed dev, prod, or staging)
 
-		}
-		credentials.dbcreds = cloudant_creds;
-		credentials.peerURLs = peerURLs;
-		credentials.caURL = caURL;
-		credentials.peers = peers;
-		credentials.ca = ca;
-		credentials.users = users;
 	}
+	credentials.adminPass = adminPass;
+	credentials.dbcreds = cloudant_creds;
+	credentials.peerURLs = peerURLs;
+	credentials.caURL = caURL;
+	credentials.peers = peers;
+	credentials.ca = ca;
+	credentials.users = users;
+}
 
-	exports.credentials = credentials;
+exports.credentials = credentials;
