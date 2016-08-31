@@ -238,7 +238,7 @@ else {
                         console.log('overwritting users, loading from a vcap service: ', i);
                         users = servicesObject[i][0].credentials.users;
 						for (var zz in users) {
-							if (users[zz].username == 'admin') {
+							if (users[zz].username == 'WebAppAdmin') {
 								adminPass = users[zz].secret;
 							}
 						}
