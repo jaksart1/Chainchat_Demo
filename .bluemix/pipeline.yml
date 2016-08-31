@@ -26,5 +26,4 @@ stages:
       #!/bin/bash
       cf create-service ibm-blockchain-5-prod ibm-blockchain-plan-5-prod chainchat
       cf create-service cloudantNoSQLDB Shared chainchatDB
-      cf bind-service ${CF_APP} chainchatDB
       cf push "${CF_APP}"      
