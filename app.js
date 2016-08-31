@@ -68,14 +68,14 @@ chain.setECDSAModeForGRPC(true);
 // app.set('chain',chain);
 var cloudkeystore = require('./utils/keystore')
 chain.setKeyValStore(cloudkeystore.newCouchDBKeyValStore({
-    host: 'fdc45491-fa13-4064-a77d-d433ae04a9ec-bluemix.cloudant.com',
-    port: '443',
-    username: 'ptioneedengethemanctiont',
-    password: '26be7f9f1118421e3476858d726630e715843880',
-  // host: creds.dbcreds.host,
-  // port: creds.dbcreds.port,
-  // username: creds.dbcreds.username,
-  // password: creds.dbcreds.password,
+  //   host: 'fdc45491-fa13-4064-a77d-d433ae04a9ec-bluemix.cloudant.com',
+  //   port: '443',
+  //   username: 'ptioneedengethemanctiont',
+  //   password: '26be7f9f1118421e3476858d726630e715843880',
+  host: creds.dbcreds.host,
+  port: creds.dbcreds.port,
+  username: creds.dbcreds.username,
+  password: creds.dbcreds.password,
   database: 'keyvalstore',
 }));
 
@@ -94,23 +94,20 @@ for (var key in creds.ca) {
 if (caCreds == null) {
   console.log("[ERROR] Unable to retrieve credentials for the member services");
 } else {
-  // //add Membership services
-  // console.log(creds.caURL);
-
-  // chain.setMemberServicesUrl(creds.caURL, { pem: pem });
-  chain.setMemberServicesUrl("grpcs://ce3f9204-f032-4f01-ae08-b48fda71a2f7_ca.us.blockchain.ibm.com:30303", { pem: pem });
-
+  //add Membership services
+  console.log(creds.caURL);
+  chain.setMemberServicesUrl(creds.caURL, { pem: pem });
 }
 
 //Add peers
-chain.addPeer("grpcs://ce3f9204-f032-4f01-ae08-b48fda71a2f7_vp0.us.blockchain.ibm.com:30303", { pem: pem });
-chain.addPeer("grpcs://ce3f9204-f032-4f01-ae08-b48fda71a2f7_vp1.us.blockchain.ibm.com:30303", { pem: pem });
-chain.addPeer("grpcs://ce3f9204-f032-4f01-ae08-b48fda71a2f7_vp2.us.blockchain.ibm.com:30303", { pem: pem });
-chain.addPeer("grpcs://ce3f9204-f032-4f01-ae08-b48fda71a2f7_vp3.us.blockchain.ibm.com:30303", { pem: pem });
-// chain.addPeer(creds.peerURLs[0], { pem: pem });
-// chain.addPeer(creds.peerURLs[1], { pem: pem });
-// chain.addPeer(creds.peerURLs[2], { pem: pem });
-// chain.addPeer(creds.peerURLs[3], { pem: pem });
+// chain.addPeer("grpcs://ce3f9204-f032-4f01-ae08-b48fda71a2f7_vp0.us.blockchain.ibm.com:30303", { pem: pem });
+// chain.addPeer("grpcs://ce3f9204-f032-4f01-ae08-b48fda71a2f7_vp1.us.blockchain.ibm.com:30303", { pem: pem });
+// chain.addPeer("grpcs://ce3f9204-f032-4f01-ae08-b48fda71a2f7_vp2.us.blockchain.ibm.com:30303", { pem: pem });
+// chain.addPeer("grpcs://ce3f9204-f032-4f01-ae08-b48fda71a2f7_vp3.us.blockchain.ibm.com:30303", { pem: pem });
+chain.addPeer(creds.peerURLs[0], { pem: pem });
+chain.addPeer(creds.peerURLs[1], { pem: pem });
+chain.addPeer(creds.peerURLs[2], { pem: pem });
+chain.addPeer(creds.peerURLs[3], { pem: pem });
 
 
 // Set the chaincode's registrar
@@ -137,15 +134,15 @@ chain.enroll("admin", creds.adminPass, function (err, registrarUser) {
     console.log("[SUCCESS] Deployed chaincode (ID: %s): %j", results.chaincodeID, results);
     chain.chaincodeID = results.chaincodeID;
     profiles.config(chain, results.chaincodeID, "./tmp/user_profiles", {
-      host: 'fdc45491-fa13-4064-a77d-d433ae04a9ec-bluemix.cloudant.com',
-      port: '443',
+      // host: 'fdc45491-fa13-4064-a77d-d433ae04a9ec-bluemix.cloudant.com',
+      // port: '443',
 
-      username: 'fdc45491-fa13-4064-a77d-d433ae04a9ec-bluemix',
-      password: '091cc74a21bb7e13ec803fe697722d46337925f7453549c67c1b9bd8fdb03329',
-      // host: creds.dbcreds.host,
-      // port: creds.dbcreds.port,
-      // username: creds.dbcreds.username,
-      // password: creds.dbcreds.password,
+      // username: 'fdc45491-fa13-4064-a77d-d433ae04a9ec-bluemix',
+      // password: '091cc74a21bb7e13ec803fe697722d46337925f7453549c67c1b9bd8fdb03329',
+      host: creds.dbcreds.host,
+      port: creds.dbcreds.port,
+      username: creds.dbcreds.username,
+      password: creds.dbcreds.password,
       database: 'user_profiles',
 
     }, true);
