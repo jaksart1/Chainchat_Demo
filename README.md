@@ -3,3 +3,6 @@
 # Chainchat Demo
 
 Chainchat is a decentralized chat program that utilizes blockchain technology.
+
+To get started, click on the deploy to bluemix button above (Requires bluemix account).
+
