@@ -205,7 +205,7 @@ if (!process.env.VCAP_SERVICES) {
 }
 // Otherwise, get them from Bluemix
 else {
-	var peers, users, ca;
+	var peers, users, ca, cloudant_creds;
 	// credentials = process.env.VCAP_SERVICES.credentials;
 	var servicesObject = JSON.parse(process.env.VCAP_SERVICES);
     for (var i in servicesObject) {
