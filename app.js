@@ -104,6 +104,7 @@ if (caCreds == null) {
 // chain.addPeer("grpcs://ce3f9204-f032-4f01-ae08-b48fda71a2f7_vp1.us.blockchain.ibm.com:30303", { pem: pem });
 // chain.addPeer("grpcs://ce3f9204-f032-4f01-ae08-b48fda71a2f7_vp2.us.blockchain.ibm.com:30303", { pem: pem });
 // chain.addPeer("grpcs://ce3f9204-f032-4f01-ae08-b48fda71a2f7_vp3.us.blockchain.ibm.com:30303", { pem: pem });
+console.log(creds.peerURLs);
 chain.addPeer(creds.peerURLs[0], { pem: pem });
 chain.addPeer(creds.peerURLs[1], { pem: pem });
 chain.addPeer(creds.peerURLs[2], { pem: pem });
